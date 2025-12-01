@@ -11,7 +11,7 @@ void modify(char **arr,int m,int n){
                     if(arr[i][r+1] == '*') counter++;
                     if(arr[i+1][r] == '*') counter++;
                     if(arr[i+1][r+1] == '*') counter++;
-                    arr[i][r] == counter + '0';
+                    arr[i][r] = counter + '0';
                     counter = 0;
                 }else if(r == n-1){//贴右上角的，有3格
                     if(arr[i][r-1] == '*') counter++;
@@ -81,17 +81,27 @@ void modify(char **arr,int m,int n){
                 }
             }
         }
+        arr[i][n] = '\0';
     }
 }
 
 int main(){
     int m,n,k;
     scanf("%d %d %d",&m,&n,&k);
-    char arr[m][n+1];
+    char **arr = NULL;
+    arr = malloc(m*sizeof(char*));
+    for (int i=0; i<m; i++){
+        arr[i] = malloc((n+1) * sizeof(char));
+    }
     int x,y;
     for(int i=1;i<=k;i++){
         scanf("%d %d",&x,&y);
         arr[x-1][y-1] = '*';
     }
-    
+    modify(arr,m,n);
+    for(int i=0;i<=m-1;i++){
+        printf("%s\n",arr[i]);
+        free(arr[i]);
+    }
+    free(arr);
 }
