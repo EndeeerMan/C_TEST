@@ -25,22 +25,22 @@ void Generate(char **mine_grid,int m,int n){ //原始的雷区，行数，列数
     }
 }
 
-int Write_Output_Context(char **output_context,char **mine_grid,int m,int n,int last_row){ //输出字符串，雷区，雷区行数，雷区列数，上一次写入的行数。
-    int returning_row = last_row+1;
+int Write_Output_Context(char ***output_context_ptr,char **mine_grid,int m,int n,int last_row){ //输出字符串，雷区，雷区行数，雷区列数，上一次写入的行数。
+    char **output_context = *output_context_ptr;
+    output_context = realloc(output_context,(last_row + m + 1)*sizeof(char*));
+    *output_context_ptr = output_context;
+    if(output_context == NULL) exit(1);
     for(int i=0;i<=m-1;i++){ //雷区行扫描
-        for(int r=last_row+1;r<=last_row+1+m;r++){ //输出内容行扫描
-            output_context = realloc(output_context,r*sizeof(char*));
-            if(output_context == NULL) exit(1);
-            output_context[r] = malloc((n+1)*sizeof(char));
-            if(output_context[r] == NULL) exit(1);
-            memcpy(output_context[r],mine_grid[i],(n)*sizeof(char));
-            output_context[r][n] = '\0'; //写入字符串终止转义符
-            returning_row++;
-            free(mine_grid[i]);
-        }
+        output_context[last_row+i] = malloc((n+1)*sizeof(char));
+        if(output_context[last_row+i] == NULL) exit(1);
+        memcpy(output_context[last_row+i],mine_grid[i],(n)*sizeof(char));
+        output_context[last_row+i][n] = '\0'; //写入字符串终止转义符
+        free(mine_grid[i]);
     }
     free(mine_grid);
-    return returning_row;
+    output_context[last_row+m] = malloc(2*sizeof(char));
+    strcpy(output_context[last_row+m],"\0");
+    return last_row + m + 1;
 }
 
 int main(){
@@ -66,7 +66,7 @@ int main(){
             mine_grid[x-1][y-1] = '*';
         }
         Generate(mine_grid,m,n);
-        last_row = Write_Output_Context(output_context,mine_grid,m,n,last_row);
+        last_row = Write_Output_Context(&output_context,mine_grid,m,n,last_row);
     }
     for(int i=0;i<=last_row-1;i++){
         printf("%s\n",output_context[i]);
