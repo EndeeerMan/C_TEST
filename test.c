@@ -11,6 +11,13 @@ void updatescore(struct Player *p){
     scanf("%d %d %f %d",&p->FC,&p->AP,&p->Score,&p->Rating);
 }
 
+void swapPlayers(struct Player *p1, struct Player *p2){
+    struct Player temp;
+    temp = *p1;
+    *p1 = *p2;
+    *p2 = temp;
+}
+
 int main(){
     struct Player loogbee[5];
     for(int i=0;i<=4;i++){
