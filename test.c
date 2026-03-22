@@ -1,31 +1,49 @@
 #include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 
-struct Player{
-    int FC;
-    int AP;
-    float Score;
-    int Rating;
+struct PlayerData{
+    char *Name;
+    char *UUID;
 };
 
-void updatescore(struct Player *p){
-    scanf("%d %d %f %d",&p->FC,&p->AP,&p->Score,&p->Rating);
-}
-
-void swapPlayers(struct Player *p1, struct Player *p2){
-    struct Player temp;
-    temp = *p1;
-    *p1 = *p2;
-    *p2 = temp;
-}
+struct Node{
+    struct PlayerData Data;
+    struct Node *Next;
+};
 
 int main(){
-    struct Player loogbee[5];
-    for(int i=0;i<=4;i++){
-        scanf("%d %d %f %d",&loogbee[i].FC,&loogbee[i].AP,&loogbee[i].Score,&loogbee[i].Rating);
-    }
-    int sw = 0;
-    scanf("%d",&sw);
-    updatescore(&loogbee[sw]);
+    struct Node *Head = malloc(sizeof(struct Node));
+    struct Node *Second = malloc(sizeof(struct Node));
+    struct Node *Third = malloc(sizeof(struct Node));
 
-    printf("%d %d %.4f %d",loogbee[sw].FC,loogbee[sw].AP,loogbee[sw].Score,loogbee[sw].Rating);
+    Head->Data.Name = malloc(20*sizeof(char));
+    Head->Data.UUID = malloc(20*sizeof(char));
+    Second->Data.Name = malloc(20*sizeof(char));
+    Second->Data.UUID = malloc(20*sizeof(char));
+    Third->Data.Name = malloc(20*sizeof(char));
+    Third->Data.UUID = malloc(20*sizeof(char));
+
+    Head->Next = Second;
+    Second->Next = Third;
+    Third->Next = NULL;
+
+    strcpy(Head->Data.Name,"EndeeerMan");
+    strcpy(Head->Data.UUID,"9849495644");
+    strcpy(Second->Data.Name,"EndeeeeeerMan");
+    strcpy(Second->Data.UUID,"85929284949");
+    strcpy(Third->Data.Name,"wzh23x");
+    strcpy(Third->Data.UUID,"84499949");
+
+    struct Node *temp = Head;
+
+    while(temp != NULL){
+        printf("Name: %s UUID: %s\n",temp->Data.Name,temp->Data.UUID);
+
+        free(temp->Data.Name);
+        free(temp->Data.UUID);
+
+        temp = temp->Next;
+    }
+    if(temp != NULL) free(temp);
 }
