@@ -1,49 +1,32 @@
 #include <stdio.h>
-#include <stdlib.h>
 #include <string.h>
 
-struct PlayerData{
-    char *Name;
-    char *UUID;
-};
+void fun(char *s, char t[])
+{
+    int i,j=0;
+    for(i=0;i<=99,j<=99;i++,j++){
+        if(s[j] == '\0' || s[j] == '\n'){
+            t[i] = '\0';
+            return;
+        }
+        if(s[j] % 2 == 0 && !(s[j] == 0)){
+            t[i] = s[j];
+            continue;
+        }else{
+            continue;
+        }
+    }    
+    t[i] = '\0';
+}
 
-struct Node{
-    struct PlayerData Data;
-    struct Node *Next;
-};
-
-int main(){
-    struct Node *Head = malloc(sizeof(struct Node));
-    struct Node *Second = malloc(sizeof(struct Node));
-    struct Node *Third = malloc(sizeof(struct Node));
-
-    Head->Data.Name = malloc(20*sizeof(char));
-    Head->Data.UUID = malloc(20*sizeof(char));
-    Second->Data.Name = malloc(20*sizeof(char));
-    Second->Data.UUID = malloc(20*sizeof(char));
-    Third->Data.Name = malloc(20*sizeof(char));
-    Third->Data.UUID = malloc(20*sizeof(char));
-
-    Head->Next = Second;
-    Second->Next = Third;
-    Third->Next = NULL;
-
-    strcpy(Head->Data.Name,"EndeeerMan");
-    strcpy(Head->Data.UUID,"9849495644");
-    strcpy(Second->Data.Name,"EndeeeeeerMan");
-    strcpy(Second->Data.UUID,"85929284949");
-    strcpy(Third->Data.Name,"wzh23x");
-    strcpy(Third->Data.UUID,"84499949");
-
-    struct Node *temp = Head;
-
-    while(temp != NULL){
-        printf("Name: %s UUID: %s\n",temp->Data.Name,temp->Data.UUID);
-
-        free(temp->Data.Name);
-        free(temp->Data.UUID);
-
-        temp = temp->Next;
-    }
-    if(temp != NULL) free(temp);
+int main()
+{
+    char s[100], t[100];
+    
+    printf("\nPlease enter string s:");
+    scanf("%s", s);
+    
+    fun(s, t);
+    
+    printf("\nThe result is:%s\n", t);
 }
