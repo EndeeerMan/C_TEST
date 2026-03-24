@@ -1,32 +1,35 @@
 #include <stdio.h>
-#include <string.h>
+# define N 50
+# define M 11
 
-void fun(char *s, char t[])
+void fun(int *a, int *b)
 {
-    int i,j=0;
-    for(i=0;i<=99,j<=99;i++,j++){
-        if(s[j] == '\0' || s[j] == '\n'){
-            t[i] = '\0';
-            return;
-        }
-        if(s[j] % 2 == 0 && !(s[j] == 0)){
-            t[i] = s[j];
-            continue;
-        }else{
-            continue;
-        }
-    }    
-    t[i] = '\0';
+
+
+
 }
 
-int main()
+double rnd( )
 {
-    char s[100], t[100];
+    static t=29,c=217,m=1024,r=0;
+    r=(r*t+c)%m;
+    return((double) r/m);
+}
+
+void main( )
+{
+    int age[N], i,d[M];
+    for(i=0;i<N;i++)
+        age[i]=(int)(115*rnd( ));
+    /* 产生一个随机的年龄数组 */
+    printf("The original data:\n");
+    for(i=0;i<N;i++)
+        printf((i+1)%10==0? "%4d\n":"%4d", age[i]); /* 每行输出 10 个数 */
+    printf("\n\n");
     
-    printf("\nPlease enter string s:");
-    scanf("%s", s);
+    fun(age,d);
     
-    fun(s, t);
-    
-    printf("\nThe result is:%s\n", t);
+    for(i=0;i<10;i++)
+        printf("%4d-%4d:%4d\n", i*10, i*10+9,d[i]);
+    printf("Over 100:%4d\n",d[10]);
 }
