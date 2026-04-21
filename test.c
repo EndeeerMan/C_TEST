@@ -45,7 +45,8 @@ int main(){
     for(int i=1;i<=q;i++){
         scanf("%lld %lld %lld",&x,&y,&z);
         if(x == 1){
-            add_tree(y,z,n);
+            add_tree(y,z-arr[y],n);
+            arr[y] = z;
         }else if(x == 2){
             sum = sum_tree(y,z);
             if(sum%3 != 0){
