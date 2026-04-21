@@ -1,35 +1,58 @@
+#include <stdlib.h>
 #include <stdio.h>
-# define N 50
-# define M 11
 
-void fun(int *a, int *b)
-{
+long long arr[100001];
+long long tree[100001];
 
-
-
+long long lowbit(long long x){
+    return x & -x;
 }
 
-double rnd( )
-{
-    static t=29,c=217,m=1024,r=0;
-    r=(r*t+c)%m;
-    return((double) r/m);
+void add_tree(long long x,long long k,long long n){
+    while(x<=n){
+        tree[x] += k;
+        x += lowbit(x);
+    }
 }
 
-void main( )
-{
-    int age[N], i,d[M];
-    for(i=0;i<N;i++)
-        age[i]=(int)(115*rnd( ));
-    /* 产生一个随机的年龄数组 */
-    printf("The original data:\n");
-    for(i=0;i<N;i++)
-        printf((i+1)%10==0? "%4d\n":"%4d", age[i]); /* 每行输出 10 个数 */
-    printf("\n\n");
-    
-    fun(age,d);
-    
-    for(i=0;i<10;i++)
-        printf("%4d-%4d:%4d\n", i*10, i*10+9,d[i]);
-    printf("Over 100:%4d\n",d[10]);
+long long sum_tree(long long x,long long y){
+    long long ans1 = 0;
+    long long ans2 = 0;
+    while(x>0){
+        ans1 += tree[x];
+        x -= lowbit[x];
+    }
+    while(y>0){
+        ans2 += tree[y];
+        y -= lowbit(y);
+    }
+    return ans2 - ans1;
+}
+
+int main(){
+    long long n,q;
+    scanf("%lld %lld",&n,&q);
+
+    for(int i=1;i<=n;i++){
+        scanf("%lld",&arr[i]);
+        add_tree(i,arr[i],n);
+    }
+
+
+    int x,y,z;
+    int sum;
+
+    for(int i=1;i<=q;i++){
+        scanf("%d %d %d",&x,&y,&z);
+        if(x == 1){
+            add_tree(y,z,n);
+        }else if(x == 2){
+            sum = sum_tree(y,z);
+            if(sum%3 != 0){
+                printf("NO\n%d\n",3-(sum%3));
+            }else{
+                printf(YES\NO"%d\n",sum);
+            }
+        }else exit(1);
+    }
 }
