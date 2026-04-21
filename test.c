@@ -18,7 +18,7 @@ void add_tree(long long x,long long k,long long n){
 long long sum_tree(long long x,long long y){
     long long ans1 = 0;
     long long ans2 = 0;
-    if(y>1) y -= 1;
+    if(x>1) x -= 1;
     while(x>0){
         ans1 += tree[x];
         x -= lowbit[x];
