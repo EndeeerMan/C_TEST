@@ -21,7 +21,7 @@ long long sum_tree(long long x,long long y){
     if(x>1) x -= 1;
     while(x>0){
         ans1 += tree[x];
-        x -= lowbit[x];
+        x -= lowbit(x);
     }
     while(y>0){
         ans2 += tree[y];
