@@ -49,9 +49,9 @@ int main(){
         }else if(x == 2){
             sum = sum_tree(y,z);
             if(sum%3 != 0){
-                printf("NO\n%d\n",3-(sum%3));
+                printf("NO\n%lld\n",3-(sum%3));
             }else{
-                printf("YES\n%d\n",sum);
+                printf("YES\n%lld\n",sum);
             }
         }else exit(1);
     }
