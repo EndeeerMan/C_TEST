@@ -18,6 +18,7 @@ void add_tree(long long x,long long k,long long n){
 long long sum_tree(long long x,long long y){
     long long ans1 = 0;
     long long ans2 = 0;
+    if(y>1) y -= 1;
     while(x>0){
         ans1 += tree[x];
         x -= lowbit[x];
@@ -38,11 +39,11 @@ int main(){
         add_tree(i,arr[i],n);
     }
 
-    int x,y,z;
-    int sum;
+    long long x,y,z;
+    long long sum;
 
     for(int i=1;i<=q;i++){
-        scanf("%d %d %d",&x,&y,&z);
+        scanf("%lld %lld %lld",&x,&y,&z);
         if(x == 1){
             add_tree(y,z,n);
         }else if(x == 2){
