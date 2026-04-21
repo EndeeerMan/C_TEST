@@ -38,7 +38,6 @@ int main(){
         add_tree(i,arr[i],n);
     }
 
-
     int x,y,z;
     int sum;
 
