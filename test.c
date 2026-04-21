@@ -50,7 +50,7 @@ int main(){
             if(sum%3 != 0){
                 printf("NO\n%d\n",3-(sum%3));
             }else{
-                printf(YES\NO"%d\n",sum);
+                printf("YES\n%d\n",sum);
             }
         }else exit(1);
     }
